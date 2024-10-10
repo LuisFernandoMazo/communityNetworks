@@ -1,28 +1,38 @@
 package com.talentoTech.communityNetwork.entitys;
 
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "Rol")
 public class Rol {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private int idRol;
+
+    @Column(nullable = false)
     private String nombreRol;
+
+    @OneToMany(mappedBy = "rol")
+    private List<Usuario> usuarios;
+
+    public Rol() {
+    }
 
     public Rol(int idRol) {
         this.idRol = idRol;
-        this.nombreRol = getRoleNameById(idRol);
     }
 
     public int getIdRole() {
         return idRol;
     }
 
-    private String getRoleNameById(int idRole) {
-        return switch (idRole) {
-            case 1 -> "User";
-            case 2 -> "Admin";
-            case 3 -> "Manager";
-            default -> "Unknown";
-        };
-    }
-
     public String getNombreRol() {
         return nombreRol;
+    }
+
+    public void setNombreRol(String user) {
+        this.nombreRol = user;
     }
 }
