@@ -28,9 +28,9 @@ class CommunityNetworkApplicationTests {
 	}
 	@Test
 	void testCrearYRecuperarUsuario() {
-/*
+
 		TipoPublicacion tipoPublicacion = new TipoPublicacion();
-		tipoPublicacion.setNombreTipo("Anuncio");
+		tipoPublicacion.setNombreTipo("Servicios");
 		tipoPublicacionRepository.save(tipoPublicacion);
 
 		Rol rolUser = new Rol();
@@ -39,15 +39,15 @@ class CommunityNetworkApplicationTests {
 
 		// Crear un nuevo usuario
 		Usuario usuario = new Usuario("123456789", "Carlos", "Gomez", "3001234567", "carlos@gomez.com", "password123");
-
+		Usuario usuario1 = new Usuario("123456786", "Luis", "Gomez", "3001234557", "lmazo@gomez.com", "password123");
 		// Guardar el usuario en la base de datos
-		usuarioRepository.save(usuario);
+		usuarioRepository.save(usuario1);
 
 		// Recuperar el usuario por su cédula
 		Usuario encontrado = usuarioRepository.findById("123456789").orElse(null);
 
 		// Verificar que el usuario se haya guardado y recuperado correctamente
 		assertThat(encontrado).isNotNull();
-		assertThat(encontrado.getNombre()).isEqualTo("Carlos");*/
+		assertThat(encontrado.getNombre()).isEqualTo("Carlos");
 	}
 }
