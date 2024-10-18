@@ -33,7 +33,7 @@ public class Departamento {
         return idDepartamento;
     }
 
-    public String getNombreDepartamento() {
+    public String getNombreDepartamento(Object nombre) {
         return nombreDepartamento;
     }
 
@@ -43,5 +43,19 @@ public class Departamento {
     public void mostrarInformacion() {
         System.out.println("ID Departamento: " + idDepartamento);
         System.out.println("Nombre Departamento: " + nombreDepartamento);
+    }
+
+    public Object getDepartamento() {
+    }
+
+    public Object getNombre() {
+    }
+
+    public void setDepartamento(Object departamento) {
+
+    }
+
+    public void setNombre(Object nombre) {
+
     }
 }
