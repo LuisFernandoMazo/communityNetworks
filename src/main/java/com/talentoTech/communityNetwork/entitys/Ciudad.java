@@ -37,7 +37,7 @@ public class Ciudad {
         return idCiudad;
     }
 
-    public String getNombreCiudad() {
+    public String getNombreCiudad(Object nombre) {
         return nombreCiudad;
     }
 
@@ -48,5 +48,11 @@ public class Ciudad {
     public void mostrarInformacion() {
         System.out.println("ID Ciudad: " + idCiudad);
         System.out.println("Nombre Ciudad: " + nombreCiudad);
+    }
+
+    public Object getNombre() {
+    }
+
+    public Departamento getDepartamento() {
     }
 }
