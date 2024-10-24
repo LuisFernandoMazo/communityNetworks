@@ -34,6 +34,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuarioPublicador")
     private List<Publicacion> publicaciones;
 
+    @OneToMany(targetEntity = Comentario.class,fetch =FetchType.LAZY, mappedBy = "comentario")
+    private List<Comentario> comentarios;
+
     public Usuario() {
     }
 
