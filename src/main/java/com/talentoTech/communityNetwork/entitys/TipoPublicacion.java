@@ -1,5 +1,7 @@
 package com.talentoTech.communityNetwork.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -14,13 +16,35 @@ public class TipoPublicacion {
     private String nombreTipo;
 
     @OneToMany(mappedBy = "tipoPublicacion")
+    @JsonBackReference
     private List<Publicacion> publicaciones;
 
     public TipoPublicacion(){
     }
 
+    public Integer getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(Integer idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public String getNombreTipo() {
+        return nombreTipo;
+    }
+
     public void setNombreTipo(String anuncio) {
         this.nombreTipo = anuncio;
     }
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
+    }
+
 }
 

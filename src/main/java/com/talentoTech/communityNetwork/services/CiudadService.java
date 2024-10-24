@@ -1,7 +1,9 @@
 package com.talentoTech.communityNetwork.services;
 
 import com.talentoTech.communityNetwork.entitys.Ciudad;
+import com.talentoTech.communityNetwork.entitys.Departamento;
 import com.talentoTech.communityNetwork.repository.CiudadRepository;
+import com.talentoTech.communityNetwork.repository.DepartamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,19 @@ public class CiudadService {
     @Autowired
     private CiudadRepository ciudadRepository;
 
-    public Ciudad crearCiudad(Ciudad ciudad) {
-        return ciudadRepository.save(ciudad);
-    }
+    @Autowired
+    private DepartamentoRepository departamentoRepository;
 
+    public Ciudad crearCiudad(String nombreCiudad, Integer idDepartamento) {
+
+        Departamento departamento = departamentoRepository.findById(idDepartamento)
+                .orElseThrow(() -> new RuntimeException("Departamento no encontrado"));
+
+        Ciudad ciudad = new Ciudad(nombreCiudad, departamento);
+
+        return  ciudadRepository.save(ciudad);
+    }
+/*
     public List<Ciudad> obtenerCiudades() {
         return ciudadRepository.findAll();
     }
@@ -39,5 +50,5 @@ public class CiudadService {
 
     public List<Ciudad> getLista() {
         return ciudadRepository.findAll();
-    }
+    }*/
 }

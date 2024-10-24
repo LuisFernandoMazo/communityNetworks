@@ -1,50 +1,37 @@
-package com.talentoTech.communityNetwork.entitys;
+package com.talentoTech.communityNetwork.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.talentoTech.communityNetwork.dto.UsuarioDTO;
-import jakarta.persistence.*;
+import com.talentoTech.communityNetwork.entitys.Ciudad;
+import com.talentoTech.communityNetwork.entitys.Publicacion;
+import com.talentoTech.communityNetwork.entitys.TipoPublicacion;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "Publicacion")
-public class Publicacion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PublicacionDTO {
     private Integer idPublicacion;
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuarioPublicador", nullable = false)
-    @JsonManagedReference
-    private Usuario usuarioPublicador;
-
-    @ManyToOne
-    @JoinColumn(name = "idTipoPublicacion", nullable = false)
-    @JsonManagedReference
+    private UsuarioDTO usuarioPublicador;
     private TipoPublicacion tipoPublicacion;
-
-    @ManyToOne
-    @JoinColumn(name = "idCiudad", nullable = false)
     private Ciudad ciudad;
-
     private String direccion;
-
-    @Column(nullable = false)
     private String titulo;
-
-    @Lob
     private String descripcion;
-
     private LocalDateTime fechaPublicacion;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-
-    @Column(nullable = false, length = 300)
     private String images;
 
-    public Publicacion(){
+    public PublicacionDTO(Publicacion publicacion, UsuarioDTO usuarioDTO){
+        this.idPublicacion = publicacion.getIdPublicacion();
+        this.usuarioPublicador = usuarioDTO;
+        this.tipoPublicacion = publicacion.getTipoPublicacion();
+        this.ciudad = publicacion.getCiudad();
+        this.direccion = publicacion.getDireccion();
+        this.titulo = publicacion.getTitulo();
+        this.descripcion = publicacion.getDescripcion();
+        this.fechaPublicacion = publicacion.getFechaPublicacion();
+        this.fechaInicio = publicacion.getFechaInicio();
+        this.fechaFin = publicacion.getFechaFin();
+        this.images = publicacion.getImages();
     }
 
     public Integer getIdPublicacion() {
@@ -55,11 +42,11 @@ public class Publicacion {
         this.idPublicacion = idPublicacion;
     }
 
-    public Usuario getUsuarioPublicador() {
+    public UsuarioDTO getUsuarioPublicador() {
         return usuarioPublicador;
     }
 
-    public void setUsuarioPublicador(Usuario usuarioPublicador) {
+    public void setUsuarioPublicador(UsuarioDTO usuarioPublicador) {
         this.usuarioPublicador = usuarioPublicador;
     }
 

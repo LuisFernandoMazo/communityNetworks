@@ -1,5 +1,6 @@
 package com.talentoTech.communityNetwork.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,8 +12,10 @@ public class Ciudad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCiudad;
 
+
     @ManyToOne
     @JoinColumn(name = "idDepartamento", nullable = false)
+    @JsonBackReference
     private Departamento departamento;
 
     @Column(nullable = false)
@@ -37,10 +40,6 @@ public class Ciudad {
         return idCiudad;
     }
 
-    public String getNombreCiudad(Object nombre) {
-        return nombreCiudad;
-    }
-
     public boolean estaRegistrada() {
         return idCiudad > 0 && nombreCiudad != null && !nombreCiudad.isEmpty();
     }
@@ -50,9 +49,11 @@ public class Ciudad {
         System.out.println("Nombre Ciudad: " + nombreCiudad);
     }
 
-    public Object getNombre() {
+    public String getNombre() {
+         return this.nombreCiudad;
     }
 
     public Departamento getDepartamento() {
+        return this.departamento;
     }
 }

@@ -4,6 +4,7 @@ import com.talentoTech.communityNetwork.entitys.Ciudad;
 import com.talentoTech.communityNetwork.repository.CiudadRepository;
 import com.talentoTech.communityNetwork.services.CiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,17 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ciudades")
+@RequestMapping("api/v1/ciudad")
 public class CiudadController {
 
     @Autowired
-    private CiudadRepository ciudadRepository;
+    private CiudadService ciudadService;
 
-    @PostMapping
-    public Ciudad crearCiudad(@RequestBody Ciudad ciudad) {
-        return ciudadRepository.save(ciudad);
+    @PostMapping("/crear")
+    public ResponseEntity<Ciudad> crearCiudad(@RequestParam("nombre") String nombreCiudad,@RequestParam("idDepartamento") Integer idDepartamento) {
+        if (nombreCiudad == null || idDepartamento == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        Ciudad nuevaCiudad = ciudadService.crearCiudad(nombreCiudad, idDepartamento);
+        return ResponseEntity.ok(nuevaCiudad);
     }
-
+/*
     CiudadService servicio = new CiudadService();
     private ResponseEntity<Object> ReponseEntity;
 
@@ -40,5 +45,5 @@ public class CiudadController {
         return ciudadRepository.findById(id)
                 .map(ciudad -> ResponseEntity.ok(ciudad))
                 .orElse(ReponseEntity.notFound().build());
-        }
+        }*/
     }
