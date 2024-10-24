@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Publicacion")
@@ -38,6 +39,9 @@ public class Publicacion {
 
     @Column(nullable = false, length = 300)
     private String images;
+
+    @OneToMany(targetEntity = Comentario.class,fetch =FetchType.LAZY, mappedBy = "comentario")
+    private List<Comentario> comentario;
 
     public Publicacion(){
 
