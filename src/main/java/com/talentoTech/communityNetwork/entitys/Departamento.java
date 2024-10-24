@@ -1,6 +1,9 @@
 package com.talentoTech.communityNetwork.entitys;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,16 +16,11 @@ public class Departamento {
     @Column(nullable = false)
     private String nombreDepartamento;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "departamento")
     private List<Ciudad> ciudades;
 
     public Departamento(){
-
-    }
-    public Departamento(int idDepartamento, String nombreDepartamento, List<Ciudad> ciudades) {
-        this.idDepartamento = idDepartamento;
-        this.nombreDepartamento = nombreDepartamento;
-        this.ciudades = ciudades;
     }
 
     public List<Ciudad> getCiudades() {
@@ -45,17 +43,21 @@ public class Departamento {
         System.out.println("Nombre Departamento: " + nombreDepartamento);
     }
 
-    public Object getDepartamento() {
+    public void setIdDepartamento(Integer idDepartamento) {
+        this.idDepartamento = idDepartamento;
     }
 
-    public Object getNombre() {
+    public String getNombreDepartamento() {
+        return nombreDepartamento;
     }
 
-    public void setDepartamento(Object departamento) {
-
+    public void setNombreDepartamento(String nombreDepartamento) {
+        this.nombreDepartamento = nombreDepartamento;
     }
 
-    public void setNombre(Object nombre) {
-
+    public void setCiudades(List<Ciudad> ciudades) {
+        this.ciudades = ciudades;
     }
+
+
 }

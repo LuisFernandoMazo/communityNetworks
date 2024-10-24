@@ -1,5 +1,7 @@
 package com.talentoTech.communityNetwork.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -31,7 +33,9 @@ public class Usuario {
     @JoinColumn(name = "idRol", nullable = false)
     private Rol rol;
 
+
     @OneToMany(mappedBy = "usuarioPublicador")
+    @JsonBackReference
     private List<Publicacion> publicaciones;
 
     @OneToMany(targetEntity = Comentario.class,fetch =FetchType.LAZY, mappedBy = "comentario")
@@ -48,11 +52,78 @@ public class Usuario {
         this.correo = correo;
         this.contrasena = contrasena;
         this.estado = true;
-        this.rol = new Rol(1);
     }
 
     public String getNombre() {
         return this.nombre;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
     }
 }
 
