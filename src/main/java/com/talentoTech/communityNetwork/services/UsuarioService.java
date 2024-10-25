@@ -70,8 +70,9 @@ public class UsuarioService {
         return false;
     }
 
-    public Optional<Usuario> findByIdUser(String cedula) throws Exception {
-        Usuario usuario = usuarioRepository.findByCedula(cedula).orElseThrow(() -> new Exception("Cedula no encontrada"));
-            return Optional.of(usuario);
+    public Usuario findByIdUser(String cedula) throws Exception {
+        Usuario usuario = usuarioRepository.findById(cedula).orElseThrow(() -> new Exception("Cedula no encontrada"));
+
+        return  usuario;
     }
 }
