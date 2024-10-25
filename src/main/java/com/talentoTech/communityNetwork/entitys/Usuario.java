@@ -35,10 +35,10 @@ public class Usuario {
 
 
     @OneToMany(mappedBy = "usuarioPublicador")
-    @JsonBackReference
+    @JsonManagedReference(value = "usuario-publicaciones")
     private List<Publicacion> publicaciones;
 
-    @OneToMany(targetEntity = Comentario.class,fetch =FetchType.LAZY, mappedBy = "comentario")
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Comentario> comentarios;
 
     public Usuario() {

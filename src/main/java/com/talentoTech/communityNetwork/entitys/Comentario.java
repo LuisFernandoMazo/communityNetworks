@@ -1,5 +1,6 @@
 package com.talentoTech.communityNetwork.entitys;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -18,23 +19,23 @@ public class Comentario {
 
     private LocalDate fechaComentario;
 
-    @ManyToOne(targetEntity = Publicacion.class)
-    @JoinColumn(name = "Publicacion",nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "idPublicacion", nullable = false)
+    @JsonBackReference
     private Publicacion publicacion;
 
-    @ManyToOne(targetEntity = Usuario.class)
-    @JoinColumn(name = "Usuario",nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "idUsuario", nullable = false)
     private Usuario usuario;
 
     public Comentario() {
     }
 
-    public Comentario(Usuario usuario, Publicacion publicacion, LocalDate fechaComentario, String comentario, Integer idComentario) {
+    public Comentario(Usuario usuario, Publicacion publicacion, LocalDate fechaComentario, String comentario) {
         this.usuario = usuario;
         this.publicacion = publicacion;
         this.fechaComentario = fechaComentario;
         this.comentario = comentario;
-        this.idComentario = idComentario;
     }
 
     public Integer getIdComentario() {
