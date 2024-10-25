@@ -18,12 +18,12 @@ public class Publicacion {
 
     @ManyToOne
     @JoinColumn(name = "idUsuarioPublicador", nullable = false)
-    @JsonManagedReference
+    @JsonBackReference(value = "usuario-publicaciones")
     private Usuario usuarioPublicador;
 
     @ManyToOne
     @JoinColumn(name = "idTipoPublicacion", nullable = false)
-    @JsonManagedReference
+    @JsonBackReference(value = "tipo-publicaciones")
     private TipoPublicacion tipoPublicacion;
 
     @ManyToOne
@@ -45,7 +45,7 @@ public class Publicacion {
     @Column(nullable = false, length = 300)
     private String images;
 
-    @OneToMany(targetEntity = Comentario.class,fetch =FetchType.LAZY, mappedBy = "comentario")
+    @OneToMany(mappedBy = "publicacion", fetch = FetchType.LAZY)
     private List<Comentario> comentario;
 
     public Publicacion(){

@@ -1,6 +1,7 @@
 package com.talentoTech.communityNetwork.entitys;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
@@ -16,7 +17,7 @@ public class TipoPublicacion {
     private String nombreTipo;
 
     @OneToMany(mappedBy = "tipoPublicacion")
-    @JsonBackReference
+    @JsonIgnore
     private List<Publicacion> publicaciones;
 
     public TipoPublicacion(){
