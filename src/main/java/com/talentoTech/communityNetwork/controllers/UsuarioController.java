@@ -34,8 +34,8 @@ public class UsuarioController {
     @GetMapping("/buscarUsuario/{cedula}")
     public ResponseEntity<Usuario> registrarUsuario(@PathVariable String cedula){
         try{
-            Optional<Usuario> usuario = usuarioService.findByIdUser(cedula);
-            return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+            Usuario usuario = usuarioService.findByIdUser(cedula);
+            return ResponseEntity.ok(usuario);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

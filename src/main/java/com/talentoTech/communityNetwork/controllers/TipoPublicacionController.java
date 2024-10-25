@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class TipoPublicacionController {
     private TipoPublicacionService tipoPublicacionService;
 
-    @PostMapping("/crearPublicacion")
+    @PostMapping("/crearTipoPublicacion")
     public ResponseEntity<TipoPublicacion> crearTipoPublicacion(@RequestBody TipoPublicacion publicacion){
+
+        if(publicacion.getNombreTipo() == null || publicacion.getNombreTipo().isEmpty()){
+            return  ResponseEntity.badRequest().body(null);
+        }
         TipoPublicacion tipoPublicacion = tipoPublicacionService.crearTipoPublicacion(publicacion);
 
         return ResponseEntity.ok(tipoPublicacion);
