@@ -39,6 +39,7 @@ public class Usuario {
     private List<Publicacion> publicaciones;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Comentario> comentarios;
 
     public Usuario() {
@@ -124,6 +125,14 @@ public class Usuario {
 
     public void setPublicaciones(List<Publicacion> publicaciones) {
         this.publicaciones = publicaciones;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }
 

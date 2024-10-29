@@ -45,8 +45,13 @@ public class Publicacion {
     @Column(nullable = false, length = 300)
     private String images;
 
-    @OneToMany(mappedBy = "publicacion", fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "publicacion", fetch = FetchType.LAZY)
+    private List<Comentario> comentario;*/
+
+    @OneToMany(targetEntity = Comentario.class,fetch = FetchType.LAZY,mappedBy = "publicacion")
+    @JsonManagedReference
     private List<Comentario> comentario;
+
 
     public Publicacion(){
     }
