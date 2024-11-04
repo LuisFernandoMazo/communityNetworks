@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/usuarios")
 public class UsuarioController {
@@ -25,7 +26,7 @@ public class UsuarioController {
     public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario){
         try{
             usuarioService.registerUsuario(usuario);
-            return new ResponseEntity<>("Usuario registrado exitosamente", HttpStatus.CREATED);
+            return ResponseEntity.ok(null);
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

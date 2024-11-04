@@ -23,7 +23,6 @@ public class Publicacion {
 
     @ManyToOne
     @JoinColumn(name = "idTipoPublicacion", nullable = false)
-    @JsonBackReference(value = "tipo-publicaciones")
     private TipoPublicacion tipoPublicacion;
 
     @ManyToOne
@@ -49,7 +48,7 @@ public class Publicacion {
     private List<Comentario> comentario;*/
 
     @OneToMany(targetEntity = Comentario.class,fetch = FetchType.LAZY,mappedBy = "publicacion")
-    @JsonManagedReference
+    @JsonManagedReference (value = "publicacion-comentario")
     private List<Comentario> comentario;
 
 

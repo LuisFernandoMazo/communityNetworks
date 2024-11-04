@@ -57,7 +57,7 @@ public class PublicacionController {
             System.out.println("Guardando archivo en: " + filePath.toString());
 
             Files.copy(file.getInputStream(), filePath);
-            String imageUrl = "file:///D:/proyectos%20personales/communityNetworks/communityNetworks/" + IMAGE_UPLOAD_DIR + fileName;
+            String imageUrl = "file:///C:/Users/tomas/IdeaProjects/communityNetworks/uploads/images/" + IMAGE_UPLOAD_DIR + fileName;
 
             Publicacion publicacion = publicacionService.createPost(titulo, descripcion, direccion, fechaInicio, fechaFin, idCiudad, idTipoPublicacion, idUsuarioPublicador, imageUrl);
             logger.debug("Publicación creada exitosamente");
