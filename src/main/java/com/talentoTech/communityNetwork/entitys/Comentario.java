@@ -22,7 +22,7 @@ public class Comentario {
 
     @ManyToOne(targetEntity = Publicacion.class)
     @JoinColumn(name = "id_publicacion")
-    @JsonBackReference
+    @JsonBackReference(value = "publicacion-comentario")
     private Publicacion publicacion;
 
     /*@ManyToOne
@@ -32,7 +32,7 @@ public class Comentario {
 
     @ManyToOne(targetEntity = Usuario.class)
     @JoinColumn(name = "cedula",nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "usuario-comentarios")
     private Usuario usuario;
 
     public Comentario() {

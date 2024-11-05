@@ -12,8 +12,10 @@ import com.talentoTech.communityNetwork.repository.TipoPublicacionRepository;
 import com.talentoTech.communityNetwork.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.parser.Parser;
 import java.rmi.ServerException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -57,7 +59,7 @@ public class PublicacionService {
         publicacion.setTipoPublicacion(tipoPublicacion);
         publicacion.setUsuarioPublicador(usuario);
         publicacion.setImages(imageUrl);
-        publicacion.setFechaPublicacion(LocalDateTime.now());
+        publicacion.setFechaPublicacion(LocalDate.now());
 
         return publicacionRepository.save(publicacion);
     }
@@ -77,4 +79,36 @@ public class PublicacionService {
         }).collect(Collectors.toList());
     }
 
+
+    public PublicacionDTO findPublicacionById(Integer id) {
+        Publicacion publicacion = publicacionRepository.findById(id).orElseThrow(()-> new RuntimeException("Publicación no encontrada"));
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(
+                publicacion.getUsuarioPublicador().getNombre(),
+                publicacion.getUsuarioPublicador().getApellido(),
+                publicacion.getUsuarioPublicador().getCorreo(),
+                publicacion.getUsuarioPublicador().getTelefono()
+        );
+
+        return new PublicacionDTO(publicacion, usuarioDTO);
+    }
+
+    public List<PublicacionDTO> filtrarPublicaciones(String query, LocalDate fecha, String ciudad, String tipo) {
+        // Llamar al repositorio para obtener las publicaciones filtradas
+        List<Publicacion> publicaciones = publicacionRepository.filtrarPorParametros(query, fecha, ciudad, tipo);
+
+        // Convertir la lista de Publicacion a PublicacionDTO, incluyendo UsuarioDTO
+        return publicaciones.stream().map(publicacion -> {
+            // Crear el UsuarioDTO a partir del usuario publicador de la publicación
+            UsuarioDTO usuarioDTO = new UsuarioDTO(
+                    publicacion.getUsuarioPublicador().getNombre(),
+                    publicacion.getUsuarioPublicador().getApellido(),
+                    publicacion.getUsuarioPublicador().getCorreo(),
+                    publicacion.getUsuarioPublicador().getTelefono()
+            );
+
+            // Retornar la PublicacionDTO
+            return new PublicacionDTO(publicacion, usuarioDTO);
+        }).collect(Collectors.toList());
+    }
 }

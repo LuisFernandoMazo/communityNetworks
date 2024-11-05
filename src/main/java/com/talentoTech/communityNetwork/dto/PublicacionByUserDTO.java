@@ -7,9 +7,8 @@ import com.talentoTech.communityNetwork.entitys.TipoPublicacion;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class PublicacionDTO {
+public class PublicacionByUserDTO {
     private Integer idPublicacion;
-    private UsuarioDTO usuarioPublicador;
     private TipoPublicacion tipoPublicacion;
     private Ciudad ciudad;
     private String direccion;
@@ -20,34 +19,17 @@ public class PublicacionDTO {
     private LocalDate fechaFin;
     private String images;
 
-    public PublicacionDTO(Publicacion publicacion, UsuarioDTO usuarioDTO){
-        this.idPublicacion = publicacion.getIdPublicacion();
-        this.usuarioPublicador = usuarioDTO;
-        this.tipoPublicacion = publicacion.getTipoPublicacion();
-        this.ciudad = publicacion.getCiudad();
-        this.direccion = publicacion.getDireccion();
-        this.titulo = publicacion.getTitulo();
-        this.descripcion = publicacion.getDescripcion();
-        this.fechaPublicacion = publicacion.getFechaPublicacion();
-        this.fechaInicio = publicacion.getFechaInicio();
-        this.fechaFin = publicacion.getFechaFin();
-        this.images = publicacion.getImages();
-    }
-
-    public Integer getIdPublicacion() {
-        return idPublicacion;
-    }
-
-    public void setIdPublicacion(Integer idPublicacion) {
+    public PublicacionByUserDTO(Integer idPublicacion, TipoPublicacion tipoPublicacion, Ciudad ciudad, String direccion, String titulo, String descripcion, LocalDate fechaPublicacion, LocalDate fechaInicio, LocalDate fechaFin, String images) {
         this.idPublicacion = idPublicacion;
-    }
-
-    public UsuarioDTO getUsuarioPublicador() {
-        return usuarioPublicador;
-    }
-
-    public void setUsuarioPublicador(UsuarioDTO usuarioPublicador) {
-        this.usuarioPublicador = usuarioPublicador;
+        this.tipoPublicacion = tipoPublicacion;
+        this.ciudad = ciudad;
+        this.direccion = direccion;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaPublicacion = fechaPublicacion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.images = images;
     }
 
     public TipoPublicacion getTipoPublicacion() {

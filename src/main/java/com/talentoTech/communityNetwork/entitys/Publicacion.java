@@ -18,12 +18,10 @@ public class Publicacion {
 
     @ManyToOne
     @JoinColumn(name = "idUsuarioPublicador", nullable = false)
-    @JsonBackReference(value = "usuario-publicaciones")
     private Usuario usuarioPublicador;
 
     @ManyToOne
     @JoinColumn(name = "idTipoPublicacion", nullable = false)
-    @JsonBackReference(value = "tipo-publicaciones")
     private TipoPublicacion tipoPublicacion;
 
     @ManyToOne
@@ -38,7 +36,7 @@ public class Publicacion {
     @Lob
     private String descripcion;
 
-    private LocalDateTime fechaPublicacion;
+    private LocalDate fechaPublicacion;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
@@ -49,7 +47,7 @@ public class Publicacion {
     private List<Comentario> comentario;*/
 
     @OneToMany(targetEntity = Comentario.class,fetch = FetchType.LAZY,mappedBy = "publicacion")
-    @JsonManagedReference
+    @JsonManagedReference (value = "publicacion-comentario")
     private List<Comentario> comentario;
 
 
@@ -112,11 +110,11 @@ public class Publicacion {
         this.descripcion = descripcion;
     }
 
-    public LocalDateTime getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(LocalDateTime fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 

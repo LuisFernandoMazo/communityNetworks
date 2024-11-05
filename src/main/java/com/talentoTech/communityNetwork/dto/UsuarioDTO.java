@@ -1,17 +1,34 @@
 package com.talentoTech.communityNetwork.dto;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class UsuarioDTO {
     private String nombre;
     private String apellido;
     private String correo;
     private String telefono;
+    private List<?> publicaciones;
 
+    public List<?> getPublicaciones() {
+        return publicaciones;
+    }
 
-    public UsuarioDTO(String nombre, String apellido,String correo, String telefono) {
+    public UsuarioDTO(String nombre, String apellido, String correo, String telefono, List<?> publicaciones) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.telefono = telefono;
+        this.publicaciones = publicaciones;
+    }
+
+    public UsuarioDTO(String nombre, String apellido, String correo, String telefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.publicaciones = new ArrayList<>();
     }
 
     public String getNombre() {

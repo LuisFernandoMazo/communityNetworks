@@ -1,5 +1,6 @@
 package com.talentoTech.communityNetwork.controllers;
 
+import com.talentoTech.communityNetwork.dto.UsuarioDTO;
 import com.talentoTech.communityNetwork.entitys.Usuario;
 
 import com.talentoTech.communityNetwork.services.UsuarioService;
@@ -25,16 +26,16 @@ public class UsuarioController {
     public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario){
         try{
             usuarioService.registerUsuario(usuario);
-            return new ResponseEntity<>("Usuario registrado exitosamente", HttpStatus.CREATED);
+            return ResponseEntity.ok(null);
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/buscarUsuario/{cedula}")
-    public ResponseEntity<Usuario> registrarUsuario(@PathVariable String cedula){
+    public ResponseEntity<UsuarioDTO> registrarUsuario(@PathVariable String cedula){
         try{
-            Usuario usuario = usuarioService.findByIdUser(cedula);
+            UsuarioDTO usuario = usuarioService.findByIdUser(cedula);
             return ResponseEntity.ok(usuario);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -26,24 +26,10 @@ public class CiudadController {
         Ciudad nuevaCiudad = ciudadService.crearCiudad(nombreCiudad, idDepartamento);
         return ResponseEntity.ok(nuevaCiudad);
     }
-/*
-    CiudadService servicio = new CiudadService();
-    private ResponseEntity<Object> ReponseEntity;
-
-    @GetMapping("/listarCiudades")
-    public List<Ciudad> listar(){
-        return servicio.getLista();
-    }
-
-    @GetMapping
-    public List<Ciudad> obtenerCiudades() {
-        return ciudadRepository.findAll();
-    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ciudad> obtenerCiudadPorId(@PathVariable String id){
-        return ciudadRepository.findById(id)
-                .map(ciudad -> ResponseEntity.ok(ciudad))
-                .orElse(ReponseEntity.notFound().build());
-        }*/
+    public ResponseEntity<Ciudad> obtenerCiudadPorId(@PathVariable Integer id){
+        Ciudad ciudad = ciudadService.obtenerCiudadPorId(id).orElseThrow(() -> new RuntimeException("Departamento no encontrado"));
+        return ResponseEntity.ok(ciudad);
     }
+}

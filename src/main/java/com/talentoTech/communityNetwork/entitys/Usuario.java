@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 @Entity
 @Table(name = "Usuario")
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @Column(nullable = false, length = 100, unique = true)
     private String cedula;
@@ -39,7 +40,7 @@ public class Usuario {
     private List<Publicacion> publicaciones;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference(value = "usuario-comentarios")
     private List<Comentario> comentarios;
 
     public Usuario() {
