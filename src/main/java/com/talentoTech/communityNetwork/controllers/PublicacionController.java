@@ -19,12 +19,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.rmi.ServerException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/publicacion")
 public class PublicacionController {
-    private static final String IMAGE_UPLOAD_DIR = "uploads/images/";
+    private static final String IMAGE_UPLOAD_DIR = "D:/uploads/images/";
     private static final Logger logger = LoggerFactory.getLogger(PublicacionController.class);
     @Autowired
     private PublicacionService publicacionService;
@@ -53,11 +58,10 @@ public class PublicacionController {
             }
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
             Path filePath = imagePath.resolve(fileName);
-
-            System.out.println("Guardando archivo en: " + filePath.toString());
-
             Files.copy(file.getInputStream(), filePath);
-            String imageUrl = "file:///D:/proyectos%20personales/communityNetworks/communityNetworks/" + IMAGE_UPLOAD_DIR + fileName;
+            logger.debug("Guardando archivo en: " + filePath.toString());
+
+            String imageUrl = "uploads/images/" + fileName;
 
             Publicacion publicacion = publicacionService.createPost(titulo, descripcion, direccion, fechaInicio, fechaFin, idCiudad, idTipoPublicacion, idUsuarioPublicador, imageUrl);
             logger.debug("Publicación creada exitosamente");
@@ -82,4 +86,41 @@ public class PublicacionController {
                     .body(null);
         }
     }
+
+    @GetMapping("/obtenerPublicacionPorId/{id}")
+    public ResponseEntity<PublicacionDTO> getPublicacionById(@PathVariable Integer id) {
+        try {
+            PublicacionDTO publicacion = publicacionService.findPublicacionById(id);
+            return ResponseEntity.ok(publicacion);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<PublicacionDTO>> buscarPublicaciones(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) String fecha,
+            @RequestParam(required = false) String ciudad,
+            @RequestParam(required = false) String tipo) {
+
+        LocalDate fechaConvertida = null;
+
+        // Convertir el valor de la fecha a LocalDate
+        if (fecha != null && !fecha.isEmpty()) {
+            try {
+                // Convertir la cadena de fecha (yyyy-MM-dd) a LocalDate
+                fechaConvertida = LocalDate.parse(fecha);
+            } catch (DateTimeParseException e) {
+                // Manejo de error si la conversión falla
+                return ResponseEntity.badRequest().build();  // 400 Bad Request
+            }
+        }
+
+        // Llamar al servicio con los filtros aplicados
+        List<PublicacionDTO> publicaciones = publicacionService.filtrarPublicaciones(query, fechaConvertida, ciudad, tipo);
+
+        return ResponseEntity.ok(publicaciones);
+    }
+
 }

@@ -4,6 +4,7 @@ import com.talentoTech.communityNetwork.entitys.Ciudad;
 import com.talentoTech.communityNetwork.entitys.Departamento;
 import com.talentoTech.communityNetwork.repository.CiudadRepository;
 import com.talentoTech.communityNetwork.repository.DepartamentoRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,26 +29,15 @@ public class CiudadService {
 
         return  ciudadRepository.save(ciudad);
     }
-/*
+
     public List<Ciudad> obtenerCiudades() {
         return ciudadRepository.findAll();
     }
 
-    public Optional<Ciudad> obtenerCiudadPorId(String id) {
+    public Optional<Ciudad> obtenerCiudadPorId(Integer id) {
         return ciudadRepository.findById(id);
     }
-
-    public Ciudad actualizarCiudad(Ciudad ciudad, String id) {
-        Ciudad ciudadExistente = ciudadRepository.findById(id).orElseThrow(() -> new RuntimeException("Ciudad no encontrada"));
-        ciudadExistente.getNombreCiudad(ciudad.getNombre());
-        ciudadExistente.setDepartamento(ciudad.getDepartamento());
-        return ciudadRepository.save(ciudadExistente);
-    }
-
-    public void eliminarCiudad(String id) {
-        ciudadRepository.deleteById(id);
-    }
-
+/*
     public List<Ciudad> getLista() {
         return ciudadRepository.findAll();
     }*/

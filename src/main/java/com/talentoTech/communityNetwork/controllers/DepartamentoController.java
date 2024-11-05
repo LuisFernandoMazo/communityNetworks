@@ -27,20 +27,20 @@ public class DepartamentoController {
         Departamento nuevoDepartamento = departamentoService.crearDepartamento(departamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoDepartamento);
     }
-/*
+
     // Obtener todos los departamentos
-    @GetMapping
+    @GetMapping("/findAllDpto")
     public List<Departamento> obtenerDepartamentos() {
-        return departamentoRepository.findAll();
+        return departamentoService.getAllDpto();
     }
 
     // Obtener un departamento por su ID
     @GetMapping("/{id}")
-    public ResponseEntity<Departamento> obtenerDepartamentoPorId(@PathVariable String id) {
-        return departamentoRepository.findById(id)
-                .map(departamento -> ResponseEntity.ok(departamento))
-                .orElse(ResponseEntity.notFound().build());
-    }
+    public ResponseEntity<Departamento> obtenerDepartamentoPorId(@PathVariable Integer id) {
+        Departamento dpto = departamentoService.obtenerDepartamentoPorId(id).orElseThrow(()-> new RuntimeException("Departamento no encontrado"));
+        return ResponseEntity.ok(dpto);
+
+    }/*
 
     // Actualizar un departamento
     @PutMapping("/{id}")

@@ -12,9 +12,10 @@ import java.util.Date;
 public class JwtUtil {
     private final SecretKey SECRET_KEY = Keys.secretKeyFor(io.jsonwebtoken.SignatureAlgorithm.HS256);
 
-    public String generateToken(String correo){
+    public String generateToken(String correo, String idUser){
         return Jwts.builder()
                 .setSubject(correo)
+                .claim("idUser", idUser)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SECRET_KEY)

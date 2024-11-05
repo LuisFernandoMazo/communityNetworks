@@ -17,25 +17,12 @@ public class DepartamentoService {
         return departamentoRepository.save(departamento);
     }
 
-/*
-    public List<Departamento> obtenerDepartamento() {
-        return DepartamentoRepository.findAll();
+    public List<Departamento> getAllDpto() {
+        return departamentoRepository.findAll();
     }
 
-    public Optional<Departamento> obtenerDepartamentoPorId(String id) {
-        return DepartamentoRepository.findById(id);
+    public Optional<Departamento> obtenerDepartamentoPorId(Integer id) {
+        return departamentoRepository.findById(id);
     }
 
-    public Departamento actualizarDepartamento(Departamento departamento, String id) {
-        Departamento departamentoExistente = DepartamentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Departamento no encontrada"));
-        /*
-        departamentoExistente.getNombreDepartamento(departamento.getNombre());
-        departamentoExistente.setDepartamento(departamento.getDepartamento());
-
-        return DepartamentoRepository.save(departamentoExistente);
-    }
-
-    public void eliminarDepartamento(String id) {
-        DepartamentoRepository.deleteById(id);
-    }*/
 }
