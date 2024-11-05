@@ -18,7 +18,6 @@ public class Publicacion {
 
     @ManyToOne
     @JoinColumn(name = "idUsuarioPublicador", nullable = false)
-    @JsonBackReference(value = "usuario-publicaciones")
     private Usuario usuarioPublicador;
 
     @ManyToOne
@@ -37,7 +36,7 @@ public class Publicacion {
     @Lob
     private String descripcion;
 
-    private LocalDateTime fechaPublicacion;
+    private LocalDate fechaPublicacion;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
@@ -111,11 +110,11 @@ public class Publicacion {
         this.descripcion = descripcion;
     }
 
-    public LocalDateTime getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(LocalDateTime fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 

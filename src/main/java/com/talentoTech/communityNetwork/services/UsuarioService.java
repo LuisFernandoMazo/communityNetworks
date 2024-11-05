@@ -1,5 +1,9 @@
 package com.talentoTech.communityNetwork.services;
 
+import com.talentoTech.communityNetwork.dto.PublicacionByUserDTO;
+import com.talentoTech.communityNetwork.dto.PublicacionDTO;
+import com.talentoTech.communityNetwork.dto.UsuarioDTO;
+import com.talentoTech.communityNetwork.entitys.Publicacion;
 import com.talentoTech.communityNetwork.entitys.Rol;
 import com.talentoTech.communityNetwork.entitys.Departamento;
 import com.talentoTech.communityNetwork.entitys.Usuario;
@@ -13,7 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -70,9 +76,35 @@ public class UsuarioService {
         return false;
     }
 
-    public Usuario findByIdUser(String cedula) throws Exception {
+    public UsuarioDTO findByIdUser(String cedula) throws Exception {
         Usuario usuario = usuarioRepository.findById(cedula).orElseThrow(() -> new Exception("Cedula no encontrada"));
 
+        List<PublicacionByUserDTO> publicacionesDTO = usuario.getPublicaciones().stream().map(publicacion -> new PublicacionByUserDTO(
+                publicacion.getIdPublicacion(),
+                publicacion.getTipoPublicacion(),  // Incluye tipo de publicacion
+                publicacion.getCiudad(),
+                publicacion.getDireccion(),
+                publicacion.getTitulo(),
+                publicacion.getDescripcion(),
+                publicacion.getFechaPublicacion(),
+                publicacion.getFechaInicio(),
+                publicacion.getFechaFin(),
+                publicacion.getImages()
+        )).toList();
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(
+               usuario.getNombre(),
+                usuario.getApellido(),
+                usuario.getCorreo(),
+                usuario.getTelefono(),
+                publicacionesDTO
+        );
+
+        return usuarioDTO;
+    }
+
+    public Usuario findByCorreoUser(String correo) throws Exception {
+        Usuario usuario = usuarioRepository.findByCorreo(correo).orElseThrow(() -> new Exception("Cedula no encontrada"));
         return  usuario;
     }
 }

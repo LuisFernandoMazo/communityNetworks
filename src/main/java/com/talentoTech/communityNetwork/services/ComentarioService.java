@@ -40,7 +40,7 @@ public class ComentarioService {
             throws  Exception{
 
 
-        Publicacion publicacion = publicacionRepository.findById(id_publicacion).orElseThrow(() -> new RuntimeException("Publicación no encontrada"));
+        Publicacion publicacion = publicacionRepository.findById(Integer.valueOf(id_publicacion)).orElseThrow(() -> new RuntimeException("Publicación no encontrada"));
         Usuario usuario = usuarioRepository.findById(idUsuarioComentario).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         Comentario comentario2 = new Comentario();

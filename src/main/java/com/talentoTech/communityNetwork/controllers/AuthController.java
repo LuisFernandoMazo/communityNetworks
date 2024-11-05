@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.talentoTech.communityNetwork.entitys.Usuario;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -21,13 +22,12 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
         boolean isAuthenticated = usuarioService.validateUser(loginRequest.getCorreo(), loginRequest.getContrasena());
 
-        System.out.println(loginRequest);
-
         if(isAuthenticated){
-            String token = jwtUtil.generateToken(loginRequest.getCorreo());
+            Usuario usuario = usuarioService.findByCorreoUser(loginRequest.getCorreo());
+            String token = jwtUtil.generateToken(loginRequest.getCorreo(), usuario.getCedula());
 
             return ResponseEntity.ok(new JwtResponse(token));
         }else{

@@ -8,7 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable{
+
+public class Usuario implements Serializable {
     @Id
     @Column(nullable = false, length = 100, unique = true)
     private String cedula;
