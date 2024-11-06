@@ -43,4 +43,14 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/profileUsuario/{cedula}")
+    public ResponseEntity<UsuarioDTO> profileUser(@PathVariable String cedula){
+        try{
+            UsuarioDTO usuario = usuarioService.dataProfileUser(cedula);
+            return ResponseEntity.ok(usuario);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

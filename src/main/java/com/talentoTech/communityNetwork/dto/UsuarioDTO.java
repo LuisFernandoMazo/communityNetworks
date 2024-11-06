@@ -21,6 +21,7 @@ public class UsuarioDTO {
         this.correo = correo;
         this.telefono = telefono;
         this.publicaciones = publicaciones;
+        System.out.println(publicaciones);
     }
 
     public UsuarioDTO(String nombre, String apellido, String correo, String telefono) {

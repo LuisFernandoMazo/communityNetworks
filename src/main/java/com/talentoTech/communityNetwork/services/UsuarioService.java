@@ -81,7 +81,7 @@ public class UsuarioService {
 
         List<PublicacionByUserDTO> publicacionesDTO = usuario.getPublicaciones().stream().map(publicacion -> new PublicacionByUserDTO(
                 publicacion.getIdPublicacion(),
-                publicacion.getTipoPublicacion(),  // Incluye tipo de publicacion
+                publicacion.getTipoPublicacion(),
                 publicacion.getCiudad(),
                 publicacion.getDireccion(),
                 publicacion.getTitulo(),
@@ -91,7 +91,6 @@ public class UsuarioService {
                 publicacion.getFechaFin(),
                 publicacion.getImages()
         )).toList();
-
         UsuarioDTO usuarioDTO = new UsuarioDTO(
                usuario.getNombre(),
                 usuario.getApellido(),
@@ -101,6 +100,19 @@ public class UsuarioService {
         );
 
         return usuarioDTO;
+    }
+
+    public UsuarioDTO dataProfileUser(String cedula) throws Exception {
+        Usuario usuario = usuarioRepository.findById(cedula).orElseThrow(() -> new Exception("Cedula no encontrada"));
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO(
+                usuario.getNombre(),
+                usuario.getApellido(),
+                usuario.getCorreo(),
+                usuario.getTelefono()
+        );
+
+        return  usuarioDTO;
     }
 
     public Usuario findByCorreoUser(String correo) throws Exception {
