@@ -18,6 +18,7 @@ public class Publicacion {
 
     @ManyToOne
     @JoinColumn(name = "idUsuarioPublicador", nullable = false)
+    @JsonBackReference(value = "usuario-publicaciones")
     private Usuario usuarioPublicador;
 
     @ManyToOne

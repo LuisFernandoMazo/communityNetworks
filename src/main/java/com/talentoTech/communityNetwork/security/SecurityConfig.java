@@ -27,10 +27,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/uploads/images/**").permitAll() // Permitir acceso público a imágenes
+                        .requestMatchers("/uploads/images/**").permitAll()
                         .requestMatchers("/auth/login", "/api/v1/usuarios/registro","api/v1/publicacion/obtenerPublicaciones","/api/v1/publicacion/obtenerPublicacionPorId/{id}",
-                                "/api/v1/publicacion/buscar").permitAll() // Permitir acceso a login y registro
-                        .anyRequest().authenticated() // Requiere autenticación para todas las demás rutas
+                                "/api/v1/publicacion/buscar").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class)

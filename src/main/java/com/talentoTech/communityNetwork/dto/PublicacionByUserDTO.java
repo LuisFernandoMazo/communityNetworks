@@ -48,6 +48,14 @@ public class PublicacionByUserDTO {
         this.ciudad = ciudad;
     }
 
+    public Integer getIdPublicacion() {
+        return idPublicacion;
+    }
+
+    public void setIdPublicacion(Integer idPublicacion) {
+        this.idPublicacion = idPublicacion;
+    }
+
     public String getDireccion() {
         return direccion;
     }
